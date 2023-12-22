@@ -29,3 +29,5 @@ while True:
     old_gray = gray
     if cv2.waitKey(1) == 13: 
         break
+cap.release()
+cv2.destroyAllwindows()
