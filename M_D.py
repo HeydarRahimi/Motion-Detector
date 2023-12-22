@@ -13,4 +13,11 @@ def bounding_rect(frame,thresh):
     cnts,_ =cv2.findContours(thresh.copy(),
                              cv2.RETR_EXTERAL,
                              cv2.CHAIN_APPROX_SIMPLE)
-    
+     for c in cnts:
+        if cv2.contourArea(c) < 100:
+            continue
+        (x,y,w,h) = cv2.boundingRect(c)
+        cv2.rectangle(frame, (x, y), (x+w, y + h), (e, 255, 0), 2)
+        cap= cv2.VideoCapture(e)
+        -, old gray = get_frame_gray(cap)
+        
