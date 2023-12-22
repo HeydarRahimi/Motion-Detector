@@ -17,13 +17,13 @@ def bounding_rect(frame,thresh):
         if cv2.contourArea(c) < 100:
             continue
         (x,y,w,h) = cv2.boundingRect(c)
-        cv2.rectangle(frame, (x, y), (x+w, y + h), (e, 255, 0), 2)
-        cap= cv2.VideoCapture(e)
-        -, old gray = get_frame_gray(cap)
+        cv2.rectangle(frame, (x, y), (x+w, y + h), (0, 255, 0), 2)
+        cap= cv2.VideoCapture(0)
+        _, old_gray = get_frame_gray(cap)
 while True:
     frame, gray = get_frame_gray(cap)
     frameDelta = cv2.absdiff (old_gray, gray)
-    ret, thresh = cv2.threshold (frameDelta, 10, 255, CV2.THRESH_BINARY)
+    ret, thresh = cv2.threshold (frameDelta, 10, 255, cv2.THRESH_BINARY)
     bounding_rect(frame, thresh)
     cv2.imshow('detector', frame)
     old_gray = gray
