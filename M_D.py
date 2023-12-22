@@ -20,4 +20,12 @@ def bounding_rect(frame,thresh):
         cv2.rectangle(frame, (x, y), (x+w, y + h), (e, 255, 0), 2)
         cap= cv2.VideoCapture(e)
         -, old gray = get_frame_gray(cap)
-        
+while True:
+    frame, gray = get_frame_gray(cap)
+    frameDelta = cv2.absdiff (old_gray, gray)
+    ret, thresh = cv2.threshold (frameDelta, 10, 255, CV2.THRESH_BINARY)
+    bounding_rect(frame, thresh)
+    cv2.imshow('detector', frame)
+    old_gray = gray
+    if cv2.waitKey(1) == 13: 
+        break
