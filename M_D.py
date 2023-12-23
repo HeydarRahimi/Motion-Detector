@@ -1,11 +1,12 @@
 import cv2
 import numpy as np
 
+cap= cv2.VideoCapture(0)
 def get_frame_gray(cap):
     ret, frame = cap.read()
     frame = frame[:,130:550]
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    gray = cv2.GaussianBlur(gray,(21,21)0)
+    gray = cv2.GaussianBlur(gray,(21,21),0)
     return frame, gray
 def bounding_rect(frame,thresh):
     kernel = np.ones((5,5), np.uint8)
@@ -18,7 +19,6 @@ def bounding_rect(frame,thresh):
             continue
         (x,y,w,h) = cv2.boundingRect(c)
         cv2.rectangle(frame, (x, y), (x+w, y + h), (0, 255, 0), 2)
-        cap= cv2.VideoCapture(0)
         _, old_gray = get_frame_gray(cap)
 while True:
     frame, gray = get_frame_gray(cap)
